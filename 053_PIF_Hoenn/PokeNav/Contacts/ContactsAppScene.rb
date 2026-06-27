@@ -62,7 +62,7 @@ class ContactsAppScene < PokeNavAppScene
         next unless screen.can_be_listed(trainer)
         trainerClassName = GameData::TrainerType.get(trainer.trainerType).name
         trainerName = MessageTypes.getFromHash(MessageTypes::TrainerNames, trainer.trainerName) || trainer.trainerName
-        trainer_name = _INTL("{1} {2}", trainerClassName, trainerName)
+        trainer_name = "#{trainerClassName} #{@trainer.trainerName}"
         @trainers << trainer.id
         button = ContactsAppTrainerButton.new(trainer.id, trainer.overworld_sprite, trainer_name)
 

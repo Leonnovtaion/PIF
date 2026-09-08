@@ -829,7 +829,7 @@ class Questlog
 
     pbDrawOutlineText(@main, 188, 54, 512, 384, quest.name,
                       Color.new(255, 172, 115), Color.new(0, 0, 0))
-    drawTextExMulti(@main, 188, 84, 318, 8, quest.desc,
+    drawTextExMulti(@main, 188, 84, 318, 8, quest.desc.gsub(/\\n/, "\n"),
                     Color.new(255, 255, 255), Color.new(0, 0, 0))
     pbDrawOutlineText(@main, 188, 330, 512, 384, quest.location,
                       Color.new(255, 172, 115), Color.new(0, 0, 0))

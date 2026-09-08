@@ -71,7 +71,7 @@ end
 
 class CompletedQuestMode < QuestCategory
   def initialize
-    super("Completed Quests", "Completed")
+    super(_INTL("Completed Quests"), _INTL("Completed"))
   end
   def button_path
     return "Graphics/Pictures/eqi/quest_button_complete"
@@ -89,7 +89,7 @@ end
 
 class MainQuestMode < QuestCategory
   def initialize
-    super("Main Quests", "Main Quests")
+    super(_INTL("Main Quests"), _INTL("Main Quests"))
   end
 
   def button_path
@@ -106,7 +106,7 @@ end
 
 class SideQuestMode < QuestCategory
   def initialize
-    super("Side Quests", "Side Quests")
+    super(_INTL("Side Quests"), _INTL("Side Quests"))
   end
 
   def button_path

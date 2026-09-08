@@ -35,7 +35,7 @@ class OverworldPokemonEvent < Game_Event
     @disguised = false
     species_data = GameData::Species.get(@species)
 
-    @pokemon = Pokemon.new(@species, @level)
+    @pokemon = pbGenerateWildPokemon(@species,@level)#Pokemon.new(@species, @level)
     @behavior_species = getBehaviorSpecies(species_data)
 
     unless behavior_roaming
@@ -104,6 +104,8 @@ class OverworldPokemonEvent < Game_Event
   end
 
   def setup_glow
+    @glow_in_the_dark = false
+    return
     @glow_in_the_dark = POKEMON_BEHAVIOR_DATA[@species][:glow_in_the_dark]
     if @glow_in_the_dark
       @light_effect = LightEffect_PokemonGlow.new(self)
@@ -641,5 +643,22 @@ class OverworldPokemonEvent < Game_Event
       end
     end
   end
+
+
+  #Override marshall dump to exclude stuff that crashes the game (the ref to lignt_effect)
+  def marshal_dump
+    ivars = {}
+    instance_variables.each do |var|
+      next if var == :@light_effect
+      ivars[var] = instance_variable_get(var)
+    end
+    return ivars
+  end
+
+  def marshal_load(ivars)
+    ivars.each { |var, val| instance_variable_set(var, val) }
+    @light_effect = nil
+  end
+
 end
 

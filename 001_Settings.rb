@@ -36,7 +36,7 @@ module Settings
   ANIMATE_REFLECTIONS = false # GAME_ID == :IF_HOENN #true
   USE_REFLECTIONS = false
   # Infinite fusion settings
-  NB_POKEMON = 576
+  NB_POKEMON = 582
   TRANSFER_BOX_DISCLAIMER_MESSAGE = ""
   CUSTOM_BASE_SPRITES_FOLDER = "Graphics/CustomBattlers/local_sprites/BaseSprites/"
   CUSTOM_BATTLERS_FOLDER = "Graphics/CustomBattlers/"
@@ -114,11 +114,6 @@ module Settings
   DISCORD_URL = "https://discord.com/invite/infinitefusion"
   WIKI_URL = "https://infinitefusion.fandom.com/"
   FAQ_URL = "https://hackmd.io/@PIF-Staff/PIF-Hoenn-FAQ"
-
-  AI_ENTRIES_URL = "https://ai-entries.pkmninfinitefusion.workers.dev/"
-  AI_ENTRIES_RATE_MAX_NB_REQUESTS = 10 # Nb. requests allowed in each time window
-  AI_ENTRIES_RATE_TIME_WINDOW = 120 # In seconds
-  AI_ENTRIES_RATE_LOG_FILE = 'Data/pokedex/dex_rate_limit.log' # Path to the log file
 
   CUSTOMSPRITES_RATE_MAX_NB_REQUESTS = 15 # Nb. requests allowed in each time window
   CUSTOMSPRITES_ENTRIES_RATE_TIME_WINDOW = 120 # In seconds

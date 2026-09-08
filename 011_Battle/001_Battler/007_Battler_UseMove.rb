@@ -171,6 +171,7 @@ class PokeBattle_Battler
     pbBeginTurn(choice)
     # Force the use of certain moves if they're already being used
     if usingMultiTurnAttack?
+      echoln @currentMove
       choice[2] = PokeBattle_Move.from_pokemon_move(@battle, Pokemon::Move.new(@currentMove))
       specialUsage = true
     elsif @effects[PBEffects::Encore] > 0 && choice[1] >= 0 &&
@@ -769,6 +770,7 @@ class PokeBattle_Battler
     @battle.pbJudgeCheckpoint(user, move)
     # Main effect (recoil/drain, etc.)
     targets.each do |b|
+      echoln b.item
       next if b.damageState.unaffected
       move.pbEffectAgainstTarget(user, b)
     end

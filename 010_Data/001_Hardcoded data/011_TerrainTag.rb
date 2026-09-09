@@ -418,7 +418,6 @@ GameData::TerrainTag.register({
                                 :land_wild_encounters => true,
                                 :must_walk => true,
                                 :show_footprints => true,
-                                :step_sound => "steps/step_sand",
                                 :can_fish => true,
                               })
 

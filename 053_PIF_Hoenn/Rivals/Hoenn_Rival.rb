@@ -384,9 +384,9 @@ end
 
 def playRivalBgm()
   if isPlayerFemale()
-    pbBGMPlay("rival_brendan")
+    pbBGMPlay("rival_brendan",100)
   else
-    pbBGMPlay("rival_may")
+    pbBGMPlay("rival_may",100)
   end
 end
 

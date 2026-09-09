@@ -463,3 +463,9 @@ GameData::TerrainTag.register({
                                   :ambient_sound_max_volume => 30,
                                   :can_fish => true,
                               })
+GameData::TerrainTag.register({
+                                :id => :Snow,
+                                :id_number => 44,
+                                :battle_environment => :Snow,
+                                :show_footprints => true,
+                              })

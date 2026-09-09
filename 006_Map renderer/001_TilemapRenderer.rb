@@ -200,6 +200,30 @@ class TilemapRenderer
 
     }
   }
+  EMPTY_TILE = 376
+  TILESET_SUPPORTING_SNOW_TREES = [1,2,5,7,8,9,12,13,15]
+  SNOW_SUBSTITUTIONS = {
+    #Trees
+    864 =>868, 865=>869,
+    872=>876, 873=>877,
+    880=>884, 881=>885,
+    866=>870, 867=>871,
+    874=>878, 875=>879,
+    #Grass
+    424=> 418, 425 => 418,426=> 418,427=> 418,
+    432=> 418,433=> 418,434=> 418,435=> 418,
+    440=> 418,441=> 418,442=> 418,443=> 418,
+    448=> 418,449=> 418,450=> 418,451=>418,
+    # grass details, flowers,
+    #1009=>EMPTY_TILE, 1010=>EMPTY_TILE,
+    #Ledges
+    1352=>1357,1353=>1358,1354=>1359,
+    1360=>1365, 1361=>1366,1362=>1367,
+    1368 =>1373, 1369=>1374, 1370=>1375,
+  }
+  # SNOW_TREES_TILES = [864,865,872,873,880,881,
+  #                     866,867,874,875]
+
 
   WIND_TREE_AUTOTILES = {
     1 => { # Route-field
@@ -695,6 +719,16 @@ class TilemapRenderer
 
   INVISIBLE_WALL_TILE_ID = 384
 
+
+  #Snowy trees are always 4 to the right of normal trees on tilesets that support them
+  def get_snow_tile_id(tile_id, current_tileset)
+    return tile_id unless Settings::HOENN
+    return tile_id unless TILESET_SUPPORTING_SNOW_TREES.include?(current_tileset)
+    return tile_id unless Settings::SNOW_DAY
+    return tile_id unless SNOW_SUBSTITUTIONS.include?(tile_id)
+    return SNOW_SUBSTITUTIONS[tile_id]
+  end
+
   def refresh_tile_bitmap(tile, map, tile_id)
     tile.tile_id = tile_id
     if tile_id < TILES_PER_AUTOTILE || (Settings::HOENN && tile_id == INVISIBLE_WALL_TILE_ID)
@@ -716,7 +750,7 @@ class TilemapRenderer
       #   true_tileset_start_id += single_autotile_count
       # end
 
-      filename = nil
+      tile_id = get_snow_tile_id(tile_id,map.tileset_id) #returns the original tile if no snow
       extra_autotile_hash = get_autotile_overrides(map.tileset_id, map.map_id)
 
       if extra_autotile_hash && extra_autotile_hash[tile_id]

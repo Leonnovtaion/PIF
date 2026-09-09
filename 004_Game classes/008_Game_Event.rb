@@ -39,11 +39,19 @@ class Game_Event < Game_Character
     if @event.name[/forced_z\s*=\s*(-?\d+)/i]
       @forced_z = $1.to_i
     end
+    if @event.name.include?("under_player")
+      @under_player = true
+    end
     if @event.name.include?("on_bridge")
       @on_bridge = true
     end
     moveto(@event.x, @event.y) if map
     refresh
+  end
+
+  def forced_bush_depth=(value)
+    @bush_depth = value
+    update
   end
 
   def through

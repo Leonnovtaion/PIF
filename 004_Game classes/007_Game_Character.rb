@@ -230,6 +230,7 @@ class Game_Character
 
   def calculate_bush_depth
     if @forced_bush_depth
+      echoln "forced for event #{@id}"
       @bush_depth = @forced_bush_depth
       return
     end

@@ -305,7 +305,9 @@ def checkInputDirection
   return nil
 end
 
+SWITCH_ON_BOAT = 2214
 def getOnBoat
+  $game_switches[SWITCH_ON_BOAT] = true
   set_player_graphics("boat_briney_peeko")
   $PokemonTemp.prevent_ow_battles = true
   $PokemonGlobal.boat = true
@@ -315,6 +317,7 @@ def getOffBoat
   reset_player_graphics
   $PokemonTemp.prevent_ow_battles = false
   $PokemonGlobal.boat = false
+  $game_switches[SWITCH_ON_BOAT] = false
   $game_map.refresh
 end
 

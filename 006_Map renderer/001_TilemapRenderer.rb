@@ -200,8 +200,11 @@ class TilemapRenderer
 
     }
   }
-  EMPTY_TILE = 376
-  TILESET_SUPPORTING_SNOW_TREES = [1,2,5,7,8,9,12,13,15]
+
+  #path: 276 -
+  EMPTY_TILE = 0
+  GROUND_SNOW_TILE = 418
+  TILESET_SUPPORTING_SNOW_TREES = [1,2,5,7,8,9,12,13,15,34]
   SNOW_SUBSTITUTIONS = {
     #Trees
     864 =>868, 865=>869,
@@ -210,12 +213,17 @@ class TilemapRenderer
     866=>870, 867=>871,
     874=>878, 875=>879,
     #Grass
-    424=> 418, 425 => 418,426=> 418,427=> 418,
-    432=> 418,433=> 418,434=> 418,435=> 418,
-    440=> 418,441=> 418,442=> 418,443=> 418,
-    448=> 418,449=> 418,450=> 418,451=>418,
+    424=> GROUND_SNOW_TILE, 425 => GROUND_SNOW_TILE,426=> GROUND_SNOW_TILE,427=> GROUND_SNOW_TILE,
+    432=> GROUND_SNOW_TILE,433=> GROUND_SNOW_TILE,434=> GROUND_SNOW_TILE,435=> GROUND_SNOW_TILE,
+    440=> GROUND_SNOW_TILE,441=> GROUND_SNOW_TILE,442=> GROUND_SNOW_TILE,443=> GROUND_SNOW_TILE,
+    448=> GROUND_SNOW_TILE,449=> GROUND_SNOW_TILE,450=> GROUND_SNOW_TILE,451=>GROUND_SNOW_TILE,
+
+
+
     # grass details, flowers,
-    #1009=>EMPTY_TILE, 1010=>EMPTY_TILE,
+    1009=>GROUND_SNOW_TILE, 1010=>GROUND_SNOW_TILE,
+    992=>GROUND_SNOW_TILE, 993=>GROUND_SNOW_TILE,
+
     #Ledges
     1352=>1357,1353=>1358,1354=>1359,
     1360=>1365, 1361=>1366,1362=>1367,
@@ -718,9 +726,6 @@ class TilemapRenderer
   end
 
   INVISIBLE_WALL_TILE_ID = 384
-
-
-  #Snowy trees are always 4 to the right of normal trees on tilesets that support them
   def get_snow_tile_id(tile_id, current_tileset)
     return tile_id unless Settings::HOENN
     return tile_id unless TILESET_SUPPORTING_SNOW_TREES.include?(current_tileset)

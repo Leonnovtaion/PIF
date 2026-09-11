@@ -732,3 +732,36 @@ def playAnimationAroundPlayer(animation_id, radius, only_passable = false)
   playAnimation(animation_id, selected_x, selected_y)
 end
 
+
+def playerFall(mapBelow, target_x, target_y)
+  $game_player.walk_anime =false
+  $game_player.direction_fix =true
+  $game_player.move_speed_override = 5
+  $game_player.through = true
+
+  pbWait(4)
+  pbFadeOutIn {
+    $game_temp.player_new_map_id = mapBelow
+    $game_temp.player_new_x = target_x
+    $game_temp.player_new_y = target_y-4
+    pbCancelVehicles
+    $scene.transfer_player
+    $game_map.autoplay
+    $game_map.refresh
+  }
+  pbSEPlay("bw_fall")
+  $game_player.move_down
+  $game_player.move_down
+  $game_player.move_down
+  $game_player.move_down
+  pbWait(16)
+  pbSEPlay("Earth3")
+  playAnimation(DUST_ANIMATION_ID,$game_player.x,$game_player.y)
+  $game_screen.start_shake(2, 8, 8)
+
+  $game_player.walk_anime =true
+  $game_player.direction_fix =false
+  $game_player.move_speed_override = nil
+  $game_player.through = false
+
+end

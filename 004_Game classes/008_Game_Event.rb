@@ -49,10 +49,10 @@ class Game_Event < Game_Character
     refresh
   end
 
-  def forced_bush_depth=(value)
-    @bush_depth = value
-    update
-  end
+  # def forced_bush_depth=(value)
+  #   @bush_depth = value
+  #   update
+  # end
 
   def through
     return true if @on_bridge && $PokemonGlobal.bridge <= 0

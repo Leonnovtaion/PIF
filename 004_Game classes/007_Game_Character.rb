@@ -36,6 +36,8 @@ class Game_Character
   attr_accessor :shadow_offset
   attr_accessor :animation_speed
   attr_accessor :step_anime
+
+  attr_accessor :can_hop_cliff
   def initialize(map = nil)
     @map = map
     @id = 0
@@ -92,6 +94,7 @@ class Game_Character
     @shadow_offset =0
     @animation_speed = nil #override if the animation  speed needs to be different from move speed
     @move_speed_override = nil
+    @can_hop_cliff = true
   end
 
   def at_coordinate?(check_x, check_y)
@@ -693,6 +696,10 @@ class Game_Character
       @x += (dir == 4) ? -1 : (dir == 6) ? 1 : 0
       @y += (dir == 8) ? -1 : (dir == 2) ? 1 : 0
       increase_steps
+    elsif @can_hop_cliff && (pbFacingTerrainTag.is_cliff || terrain_tag.is_cliff)
+      @through = true
+      jump_forward(1)
+      @through = false
     else
       check_event_trigger_touch(dir)
     end

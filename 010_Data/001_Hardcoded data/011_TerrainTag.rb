@@ -477,4 +477,5 @@ GameData::TerrainTag.register({
                                 :id => :Cliff,
                                 :id_number => 45,
                                 :is_cliff => true,
+                                :battle_environment => :Rock,
                               })

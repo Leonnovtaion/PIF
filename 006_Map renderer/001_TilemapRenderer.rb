@@ -218,14 +218,12 @@ class TilemapRenderer
     440=> GROUND_SNOW_TILE,441=> GROUND_SNOW_TILE,442=> GROUND_SNOW_TILE,443=> GROUND_SNOW_TILE,
     448=> GROUND_SNOW_TILE,449=> GROUND_SNOW_TILE,450=> GROUND_SNOW_TILE,451=>GROUND_SNOW_TILE,
 
-
-
     # grass details, flowers,
     1009=>GROUND_SNOW_TILE, 1010=>GROUND_SNOW_TILE,
     992=>GROUND_SNOW_TILE, 993=>GROUND_SNOW_TILE,
 
     #Ledges
-    1352=>1357,1353=>1358,1354=>1359,
+    1352=>1357,1353=>1358,1354=>1359,1355=>1350,1356=>1351,
     1360=>1365, 1361=>1366,1362=>1367,
     1368 =>1373, 1369=>1374, 1370=>1375,
   }
@@ -755,7 +753,6 @@ class TilemapRenderer
       #   true_tileset_start_id += single_autotile_count
       # end
 
-      tile_id = get_snow_tile_id(tile_id,map.tileset_id) #returns the original tile if no snow
       extra_autotile_hash = get_autotile_overrides(map.tileset_id, map.map_id)
 
       if extra_autotile_hash && extra_autotile_hash[tile_id]
@@ -779,6 +776,8 @@ class TilemapRenderer
         filename = map.tileset_name
         tile.set_bitmap(filename, tile_id, false, false, priority, @tilesets[filename])
       end
+      tile_id = get_snow_tile_id(tile_id,map.tileset_id) #returns the original tile if no snow
+
 
       tile.shows_reflection = terrain_tag_data&.shows_reflections
       tile.underwater_tile = terrain_tag_data&.underwater

@@ -23,6 +23,8 @@ class Game_Character
   attr_accessor :animation_id
   attr_accessor :transparent
   attr_reader :move_speed
+  attr_accessor :move_speed_override
+
   attr_accessor :walk_anime
   attr_writer :bob_height
   attr_accessor :under_everything # under even grass
@@ -89,6 +91,7 @@ class Game_Character
     @forced_bush_depth = nil
     @shadow_offset =0
     @animation_speed = nil #override if the animation  speed needs to be different from move speed
+    @move_speed_override = nil
   end
 
   def at_coordinate?(check_x, check_y)
@@ -230,7 +233,6 @@ class Game_Character
 
   def calculate_bush_depth
     if @forced_bush_depth
-      echoln "forced for event #{@id}"
       @bush_depth = @forced_bush_depth
       return
     end

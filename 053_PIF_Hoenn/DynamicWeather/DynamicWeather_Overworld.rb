@@ -26,6 +26,7 @@ end
 
 
 def update_overworld_weather(current_map)
+    return unless $game_weather
     return if current_map.nil?
     return if !$game_weather.current_weather
 
@@ -41,6 +42,7 @@ def update_overworld_weather(current_map)
 end
 
 def restore_weather_ambient_sounds()
+    return unless $game_weather
     current_map = $game_map.map_id
     return if !$game_weather.current_weather
     current_weather_array = $game_weather.current_weather[current_map]

@@ -94,7 +94,7 @@ class Game_Character
     @shadow_offset =0
     @animation_speed = nil #override if the animation  speed needs to be different from move speed
     @move_speed_override = nil
-    @can_hop_cliff = true
+    @can_hop_cliff = false
   end
 
   def at_coordinate?(check_x, check_y)

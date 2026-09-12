@@ -243,8 +243,6 @@ class GameWeather
     if NO_WEATHER_MAPS.include?(map_id)
       return [:None,0]
     end
-
-    echoln Settings::SNOW_DAY
     if COLD_MAPS.include?(map_id) || Settings::SNOW_DAY
       type = :Snow if type == :Rain
       type = :Blizzard if type == :Storm

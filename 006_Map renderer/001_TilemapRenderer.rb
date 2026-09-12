@@ -201,6 +201,36 @@ class TilemapRenderer
     }
   }
 
+  #path: 276 -
+  EMPTY_TILE = 0
+  GROUND_SNOW_TILE = 418
+  TILESET_SUPPORTING_SNOW_TREES = [1,2,5,7,8,9,12,13,15,34]
+  SNOW_SUBSTITUTIONS = {
+    #Trees
+    864 =>868, 865=>869,
+    872=>876, 873=>877,
+    880=>884, 881=>885,
+    866=>870, 867=>871,
+    874=>878, 875=>879,
+    #Grass
+    424=> GROUND_SNOW_TILE, 425 => GROUND_SNOW_TILE,426=> GROUND_SNOW_TILE,427=> GROUND_SNOW_TILE,
+    432=> GROUND_SNOW_TILE,433=> GROUND_SNOW_TILE,434=> GROUND_SNOW_TILE,435=> GROUND_SNOW_TILE,
+    440=> GROUND_SNOW_TILE,441=> GROUND_SNOW_TILE,442=> GROUND_SNOW_TILE,443=> GROUND_SNOW_TILE,
+    448=> GROUND_SNOW_TILE,449=> GROUND_SNOW_TILE,450=> GROUND_SNOW_TILE,451=>GROUND_SNOW_TILE,
+
+    # grass details, flowers,
+    1009=>GROUND_SNOW_TILE, 1010=>GROUND_SNOW_TILE,
+    992=>GROUND_SNOW_TILE, 993=>GROUND_SNOW_TILE,
+
+    #Ledges
+    1352=>1357,1353=>1358,1354=>1359,1355=>1350,1356=>1351,
+    1360=>1365, 1361=>1366,1362=>1367,
+    1368 =>1373, 1369=>1374, 1370=>1375,
+  }
+  # SNOW_TREES_TILES = [864,865,872,873,880,881,
+  #                     866,867,874,875]
+
+
   WIND_TREE_AUTOTILES = {
     1 => { # Route-field
            864 => "tree_sway_single_1",
@@ -694,6 +724,13 @@ class TilemapRenderer
   end
 
   INVISIBLE_WALL_TILE_ID = 384
+  def get_snow_tile_id(tile_id, current_tileset)
+    return tile_id unless Settings::HOENN
+    return tile_id unless TILESET_SUPPORTING_SNOW_TREES.include?(current_tileset)
+    return tile_id unless Settings::SNOW_DAY
+    return tile_id unless SNOW_SUBSTITUTIONS.include?(tile_id)
+    return SNOW_SUBSTITUTIONS[tile_id]
+  end
 
   def refresh_tile_bitmap(tile, map, tile_id)
     tile.tile_id = tile_id
@@ -716,7 +753,6 @@ class TilemapRenderer
       #   true_tileset_start_id += single_autotile_count
       # end
 
-      filename = nil
       extra_autotile_hash = get_autotile_overrides(map.tileset_id, map.map_id)
 
       if extra_autotile_hash && extra_autotile_hash[tile_id]
@@ -740,6 +776,8 @@ class TilemapRenderer
         filename = map.tileset_name
         tile.set_bitmap(filename, tile_id, false, false, priority, @tilesets[filename])
       end
+      tile_id = get_snow_tile_id(tile_id,map.tileset_id) #returns the original tile if no snow
+
 
       tile.shows_reflection = terrain_tag_data&.shows_reflections
       tile.underwater_tile = terrain_tag_data&.underwater

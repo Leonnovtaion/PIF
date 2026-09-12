@@ -11,6 +11,7 @@ Events.onStepTakenFieldMovement += proc { |_sender, e|
     pbBGSPlay(sound, volume)
   else
     pbBGSFade(2)
+    restore_weather_ambient_sounds
   end
 }
 

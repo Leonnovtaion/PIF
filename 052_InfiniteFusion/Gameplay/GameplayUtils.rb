@@ -33,7 +33,7 @@ def floorHole(mapBelow, frames_for_fall = 8, bikeOnly = true)
   event.instance_variable_set(:@idle_frames, event.instance_variable_get(:@idle_frames) + 1)
 
   frames_for_fall = 0 if bikeOnly && !$PokemonGlobal.bicycle
-
+  pbSEPlay("bw_fall")
   if event.instance_variable_get(:@idle_frames) >= frames_for_fall
     event.instance_variable_set(:@idle_frames, 0)
 
@@ -47,15 +47,7 @@ def floorHole(mapBelow, frames_for_fall = 8, bikeOnly = true)
     event.turn_left
 
     pbWait(4)
-    pbFadeOutIn {
-      $game_temp.player_new_map_id = mapBelow
-      $game_temp.player_new_x = target_x
-      $game_temp.player_new_y = target_y
-      pbCancelVehicles
-      $scene.transfer_player
-      $game_map.autoplay
-      $game_map.refresh
-    }
+    playerFall(mapBelow, target_x, target_y)
     pbWait(8)
   end
 end
@@ -83,15 +75,7 @@ def floorHoleSameMap(x_offset,y_offset, frames_for_fall = 8, bikeOnly = true)
     event.turn_left
 
     pbWait(4)
-    pbFadeOutIn {
-      $game_temp.player_new_map_id = $game_map.map_id
-      $game_temp.player_new_x = target_x
-      $game_temp.player_new_y = target_y
-      pbCancelVehicles
-      $scene.transfer_player
-      $game_map.autoplay
-      $game_map.refresh
-    }
+    playerFall($game_map.map_id, target_x, target_y)
     event.turn_down
     event.direction_fix = true
     pbWait(8)

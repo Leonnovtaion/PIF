@@ -52,6 +52,7 @@ module GameData
     attr_reader :shifting_tile_horizontal
     attr_reader :shifting_tile_vertical
 
+    attr_reader :is_cliff
 
     DATA = {}
 
@@ -119,6 +120,7 @@ module GameData
       @step_sound = hash[:step_sound]
       @ambient_sound = hash[:ambient_sound]
       @ambient_sound_max_volume = hash[:ambient_sound_max_volume]
+      @is_cliff = hash[:is_cliff]
 
     end
 
@@ -143,7 +145,8 @@ GameData::TerrainTag.register({
 GameData::TerrainTag.register({
                                 :id => :Ledge,
                                 :id_number => 1,
-                                :ledge => true
+                                :ledge => true,
+                                :is_cliff => true
                               })
 
 GameData::TerrainTag.register({
@@ -462,4 +465,17 @@ GameData::TerrainTag.register({
                                   :ambient_sound => "ambient/lava",
                                   :ambient_sound_max_volume => 30,
                                   :can_fish => true,
+                              })
+GameData::TerrainTag.register({
+                                :id => :Snow,
+                                :id_number => 44,
+                                :battle_environment => :Snow,
+                                :show_footprints => true,
+                              })
+
+GameData::TerrainTag.register({
+                                :id => :Cliff,
+                                :id_number => 45,
+                                :is_cliff => true,
+                                :battle_environment => :Rock,
                               })

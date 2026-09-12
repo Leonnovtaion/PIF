@@ -40,6 +40,16 @@ def update_overworld_weather(current_map)
     $game_screen.weather(current_weather_type,current_weather_intensity,0)
 end
 
+def restore_weather_ambient_sounds()
+    current_map = $game_map.map_id
+    return if !$game_weather.current_weather
+    current_weather_array = $game_weather.current_weather[current_map]
+    return if current_weather_array.nil?
+    current_weather_type = current_weather_array[0]
+    current_weather_intensity = current_weather_array[1]
+    set_weather_ambient_sounds(current_weather_type,current_weather_intensity)
+end
+
 def set_weather_ambient_sounds(weather_type,intensity)
     base_volume = 20 #At intensity 1
     volume = [base_volume + base_volume * (intensity/2),10].min #Intensity at 10: volume 100

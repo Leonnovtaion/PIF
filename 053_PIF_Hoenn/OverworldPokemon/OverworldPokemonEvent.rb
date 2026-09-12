@@ -97,6 +97,9 @@ class OverworldPokemonEvent < Game_Event
       pbSEPlay("shiny", 60)
       playAnimation(Settings::SPARKLE_SHORT_ANIMATION_ID, @x, @y)
     end
+    if POKEMON_BEHAVIOR_DATA[@behavior_species][:hop_cliff]
+      @can_hop_cliff = true
+    end
     set_roaming_movement
     @last_facing_direction = @direction
     setup_glow

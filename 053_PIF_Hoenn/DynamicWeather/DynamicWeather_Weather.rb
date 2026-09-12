@@ -40,6 +40,8 @@ class GameWeather
   BASE_CHANCES_OF_WEATHER_MOVE = 10
   DEBUG_PROPAGATION = false
 
+  NO_WEATHER_MAPS = [MAP_DESERT_UNDERPASS] #For outdoor maps that shouldn't get weather
+
   COLD_MAPS = [MAP_SHOAL_CAVE] # Rain is snow on that map (shoal cave)
   SNOW_LIMITS = [MAP_ROUTE_121,MAP_PACIFIDLOG] #Snow turns to rain if it reaches these maps
   SOOT_LIMITS = [MAP_ROUTE_113,MAP_FALLARBOR, MAP_ROUTE_111]  #Can't let it propagate too much because then the grass would have to be covered in soot in those maps too....
@@ -238,6 +240,10 @@ class GameWeather
   end
 
   def get_updated_weather(type, intensity, map_id)
+    if NO_WEATHER_MAPS.include?(map_id)
+      return [:None,0]
+    end
+
     echoln Settings::SNOW_DAY
     if COLD_MAPS.include?(map_id) || Settings::SNOW_DAY
       type = :Snow if type == :Rain
@@ -266,6 +272,7 @@ class GameWeather
       type = :Sandstorm
       intensity = 9
     end
+
     if (PBDayNight.isNight? || PBDayNight.isEvening?) && type == :Sunny
       type = :None
       intensity = 0

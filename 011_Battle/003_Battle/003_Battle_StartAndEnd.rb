@@ -83,7 +83,6 @@ class PokeBattle_Battle
           @sideSizes[0] -= 1
         end
       end
-
       PBDebug.log("Trying #{@sideSizes[0]}v#{@sideSizes[1]} battle instead")
       if @sideSizes[0] <= 0 || @sideSizes[1] <= 0
         raise _INTL("Couldn't reduce battle size any further, battle isn't possible")
